@@ -2951,7 +2951,7 @@ void DysonSphereParser::DysonSphere::parse(std::ifstream& strm)
 	read(strm, nrdCapacity);
 	read(strm, nrdCursor);
 	read(strm, nrdRecycleCursor);
-	readv(strm, nrdPool, nrdCursor);
+	readv(strm, nrdPool, nrdCursor - 1);
 	read(strm, nrdRecycle, nrdRecycleCursor);
 }
 
@@ -3054,7 +3054,7 @@ DysonSphereParser::DysonSphereParser(const CHAR* const filename) :
 		return;
 	}
 
-	m_readSuccessFlag = true;
+	m_readSuccessFlag = strm.tellg() == gameSave.fileStreamLength;
 }
 
 int main(int argc, char* argv[])
